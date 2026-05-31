@@ -69,7 +69,7 @@
         /* ─── TYPOGRAPHY ─── */
         h1 {
             font-family: var(--font);
-            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 800;
             line-height: 1.05;
             letter-spacing: -0.03em;
@@ -215,11 +215,12 @@
             top: var(--nav-h);
             left: 0;
             right: 0;
-            background: rgba(6,6,6,0.98);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border);
+            bottom: 0;
+            background: #060606;
+            overflow-y: auto;
+            border-top: 1px solid var(--border);
             padding: 1.5rem 5% 2rem;
-            z-index: 99;
+            z-index: 101;
             flex-direction: column;
             gap: 0;
         }
