@@ -1,1265 +1,867 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DISAR Softhub — Excellence & Innovation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <style>
-        /* ─── DESIGN TOKENS ─── */
-        :root {
-            --bg: #060606;
-            --bg2: #0d0d0d;
-            --bg3: #141414;
-            --bg4: #1c1c1c;
-            --border: rgba(255,255,255,0.07);
-            --border-h: rgba(255,255,255,0.18);
-            --text: #f2f2f2;
-            --text-2: #9a9a9a;
-            --text-3: #555555;
-            --accent: #a855f7;
-            --accent-2: #c084fc;
-            --accent-d: #7c3aed;
-            --accent-glow: rgba(168,85,247,0.15);
-            --nav-h: 64px;
-            --radius: 12px;
-            --font: 'Outfit', sans-serif;
-            --mono: 'JetBrains Mono', monospace;
-        }
-
-        /* ─── RESET ─── */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: var(--font);
-            font-weight: 400;
-            font-size: 1rem;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ─── SCROLLBAR ─── */
-        ::-webkit-scrollbar {
-            width: 3px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        /* ─── TYPOGRAPHY ─── */
-        h1 {
-            font-family: var(--font);
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            color: var(--text);
-        }
-
-        h2 {
-            font-family: var(--font);
-            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.025em;
-            color: var(--text);
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            font-family: var(--font);
-            font-size: 1.0rem;
-            font-weight: 600;
-            line-height: 1.4;
-            letter-spacing: -0.01em;
-            color: var(--text);
-        }
-
-        p {
-            font-size: 0.9375rem;
-            line-height: 1.75;
-            color: var(--text-2);
-        }
-
-        /* ─── NAV ─── */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            height: var(--nav-h);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            background: rgba(6,6,6,0.92);
-            backdrop-filter: blur(24px) saturate(180%);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo {
-            font-family: var(--font);
-            font-weight: 800;
-            font-size: 1.35rem;
-            letter-spacing: -0.04em;
-            color: var(--text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .logo-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            display: inline-block;
-            flex-shrink: 0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-            .nav-links a {
-                text-decoration: none;
-                color: var(--text-2);
-                font-size: 0.875rem;
-                font-weight: 500;
-                transition: color 0.2s;
-            }
-
-                .nav-links a:hover {
-                    color: var(--text);
-                }
-
-        .nav-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.55rem 1.2rem;
-            background: var(--accent);
-            color: #fff;
-            font-size: 0.8125rem;
-            font-weight: 700;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: background 0.2s, transform 0.15s;
-        }
-
-            .nav-cta:hover {
-                background: var(--accent-2);
-                transform: translateY(-1px);
-            }
-
-        /* hamburger */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 4px;
-            background: none;
-            border: none;
-        }
-
-            .hamburger span {
-                width: 22px;
-                height: 1.5px;
-                background: var(--text);
-                border-radius: 1px;
-                transition: all .25s;
-                display: block;
-            }
-
-            .hamburger.open span:nth-child(1) {
-                transform: translateY(6.5px) rotate(45deg);
-            }
-
-            .hamburger.open span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.open span:nth-child(3) {
-                transform: translateY(-6.5px) rotate(-45deg);
-            }
-
-        /* mobile menu */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: var(--nav-h);
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #060606;
-            overflow-y: auto;
-            border-top: 1px solid var(--border);
-            padding: 1.5rem 5% 2rem;
-            z-index: 101;
-            flex-direction: column;
-            gap: 0;
-        }
-
-            .mobile-menu.open {
-                display: flex;
-            }
-
-            .mobile-menu a {
-                text-decoration: none;
-                color: var(--text-2);
-                font-size: 1rem;
-                font-weight: 500;
-                padding: 0.75rem 0;
-                transition: color .2s;
-                border-bottom: 1px solid var(--border);
-            }
-
-                .mobile-menu a:last-child {
-                    border-bottom: none;
-                }
-
-                .mobile-menu a:hover {
-                    color: var(--accent);
-                }
-
-        /* ─── SECTIONS ─── */
-        section {
-            padding: 6rem 5%;
-        }
-
-        hr.divider {
-            border: none;
-            height: 1px;
-            background: var(--border);
-            margin: 0;
-        }
-
-        /* ─── LABEL ─── */
-        .label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: var(--mono);
-            font-size: 0.68rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1.25rem;
-        }
-
-            .label::before {
-                content: '';
-                width: 18px;
-                height: 1px;
-                background: var(--accent);
-                display: block;
-                flex-shrink: 0;
-            }
-
-        /* ─── SECTION HEADER ─── */
-        .section-header {
-            margin-bottom: 3rem;
-        }
-
-            .section-header .lead {
-                font-size: 0.9375rem;
-                color: var(--text-2);
-                max-width: 520px;
-                line-height: 1.75;
-                margin-top: 0.75rem;
-            }
-
-        /* ─── BTN ─── */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.8rem 1.6rem;
-            border-radius: 8px;
-            font-family: var(--font);
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #fff;
-        }
-
-            .btn-primary:hover {
-                background: var(--accent-2);
-                transform: translateY(-1px);
-            }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--text-2);
-            border: 1px solid var(--border);
-        }
-
-            .btn-outline:hover {
-                color: var(--text);
-                border-color: var(--border-h);
-            }
-
-        /* ─── HERO ─── */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: calc(var(--nav-h) + 4rem);
-            padding-bottom: 5rem;
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image: linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-            background-size: 72px 72px;
-            pointer-events: none;
-            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-        }
-
-        .hero-glow {
-            position: absolute;
-            width: 700px;
-            height: 700px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(168,85,247,0.09) 0%, transparent 65%);
-            top: 50%;
-            left: 45%;
-            transform: translate(-50%, -55%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 820px;
-        }
-
-        h1 em {
-            font-style: normal;
-            color: var(--accent);
-        }
-
-        .hero-sub {
-            font-size: 1.05rem;
-            color: var(--text-2);
-            max-width: 520px;
-            line-height: 1.75;
-            margin: 1.5rem 0 2.5rem;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        /* stats strip */
-        .stats-strip {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 5rem;
-            position: relative;
-            z-index: 2;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            max-width: 680px;
-        }
-
-        .stat-item {
-            flex: 1;
-            min-width: 130px;
-            padding: 1.5rem 1.75rem;
-            border-right: 1px solid var(--border);
-        }
-
-            .stat-item:last-child {
-                border-right: none;
-            }
-
-        .stat-val {
-            font-family: var(--font);
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--accent);
-            letter-spacing: -0.03em;
-            line-height: 1;
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-lbl {
-            font-size: 0.68rem;
-            font-weight: 500;
-            color: var(--text-3);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        /* ─── ABOUT ─── */
-        #about {
-            background: var(--bg2);
-        }
-
-        .about-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .about-text p + p {
-            margin-top: 1.2rem;
-        }
-
-        .value-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .value-row {
-            padding: 1.4rem 1.6rem;
-            background: var(--bg3);
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            transition: background 0.2s;
-        }
-
-            .value-row:hover {
-                background: var(--bg4);
-            }
-
-        .value-icon {
-            font-size: 1rem;
-            width: 34px;
-            height: 34px;
-            border-radius: 7px;
-            background: var(--bg4);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .value-row h3 {
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .value-row p {
-            font-size: 0.8125rem;
-            line-height: 1.6;
-        }
-
-        /* ─── OVERVIEW ─── */
-        #overview {
-            background: var(--bg);
-        }
-
-        .overview-box {
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            background: var(--bg2);
-            position: relative;
-            overflow: hidden;
-        }
-
-            .overview-box::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 2px;
-                background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent);
-            }
-
-            .overview-box p {
-                font-size: 0.9375rem;
-                line-height: 1.85;
-                max-width: 780px;
-            }
-
-        /* ─── SERVICES ─── */
-        #services {
-            background: var(--bg2);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 1.5px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .service-card {
-            background: var(--bg2);
-            padding: 2rem 2rem 2.5rem;
-            position: relative;
-            transition: background 0.2s;
-        }
-
-            .service-card:hover {
-                background: var(--bg3);
-            }
-
-                .service-card:hover .service-num {
-                    color: var(--accent-2);
-                }
-
-        .service-num {
-            font-family: var(--mono);
-            font-size: 0.68rem;
-            color: var(--accent);
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            margin-bottom: 1.25rem;
-            display: block;
-            transition: color 0.2s;
-        }
-
-        .service-card h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            font-size: 0.8375rem;
-            color: var(--text-2);
-            line-height: 1.7;
-        }
-
-        .service-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-top: 1.25rem;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            font-weight: 500;
-            padding: 0.25rem 0.65rem;
-            border-radius: 4px;
-            background: rgba(168,85,247,0.1);
-            color: var(--accent-2);
-            border: 1px solid rgba(168,85,247,0.2);
-        }
-
-        /* ─── WHY US ─── */
-        #why {
-            background: var(--bg);
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .why-card {
-            background: var(--bg);
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            transition: background 0.2s;
-        }
-
-            .why-card:hover {
-                background: var(--bg2);
-            }
-
-        .why-icon-wrap {
-            width: 40px;
-            height: 40px;
-            border-radius: 9px;
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-        }
-
-        .why-card h3 {
-            font-size: 0.9375rem;
-            font-weight: 600;
-        }
-
-        .why-card p {
-            font-size: 0.8125rem;
-            line-height: 1.65;
-        }
-
-        /* ─── GLOBAL REACH ─── */
-        #reach {
-            background: var(--bg2);
-        }
-
-        .reach-inner {
-            display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .regions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 2rem;
-        }
-
-        .region-chip {
-            padding: 0.5rem 1.1rem;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            background: var(--bg3);
-            font-size: 0.8125rem;
-            font-weight: 500;
-            color: var(--text-2);
-            transition: all 0.2s;
-        }
-
-            .region-chip:hover {
-                border-color: var(--accent);
-                color: var(--accent);
-            }
-
-        .reach-text p + p {
-            margin-top: 1rem;
-        }
-
-        /* ─── VALUES ─── */
-        #values {
-            background: var(--bg);
-        }
-
-        .vm-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .vm-card {
-            padding: 2.25rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            background: var(--bg2);
-            transition: border-color 0.2s;
-        }
-
-            .vm-card:hover {
-                border-color: rgba(168,85,247,0.3);
-            }
-
-            .vm-card.span2 {
-                grid-column: 1 / -1;
-            }
-
-        .vm-tag {
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .vm-card p {
-            font-size: 0.9375rem;
-            line-height: 1.8;
-        }
-
-        /* ─── CONTACT ─── */
-        #contact {
-            background: var(--bg2);
-            text-align: center;
-        }
-
-        .contact-inner {
-            max-width: 520px;
-            margin: 0 auto;
-        }
-
-        .contact-card {
-            margin-top: 2.5rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.25rem 1.75rem;
-            background: var(--bg3);
-            border-bottom: 1px solid var(--border);
-            text-decoration: none;
-            color: var(--text-2);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-            .contact-link:last-child {
-                border-bottom: none;
-            }
-
-            .contact-link:hover {
-                background: var(--bg4);
-                color: var(--text);
-            }
-
-        .contact-link-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: var(--bg4);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .contact-link-arrow {
-            margin-left: auto;
-            color: var(--text-3);
-            transition: transform 0.2s, color 0.2s;
-        }
-
-        .contact-link:hover .contact-link-arrow {
-            transform: translateX(3px);
-            color: var(--accent);
-        }
-
-        /* ─── FOOTER ─── */
-        footer {
-            padding: 1.75rem 5%;
-            border-top: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-            footer p {
-                font-size: 0.78rem;
-                color: var(--text-3);
-            }
-
-        .footer-tag {
-            font-family: var(--mono);
-            font-size: 0.68rem;
-            color: var(--accent);
-            letter-spacing: 0.06em;
-        }
-
-        /* ─── SCROLL TO TOP ─── */
-        #scrollTop {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            z-index: 90;
-            opacity: 0;
-            transform: translateY(12px);
-            pointer-events: none;
-            transition: opacity 0.3s, transform 0.3s, background 0.2s;
-            box-shadow: 0 4px 24px rgba(168,85,247,0.35);
-        }
-
-            #scrollTop.visible {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: all;
-            }
-
-            #scrollTop:hover {
-                background: var(--accent-2);
-                transform: translateY(-2px);
-            }
-
-        /* ─── REVEAL ─── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-            .reveal.visible {
-                opacity: 1;
-                transform: none;
-            }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 768px) {
-            .nav-links, .nav-cta {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .about-inner, .reach-inner {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-
-            .vm-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .vm-card.span2 {
-                grid-column: auto;
-            }
-
-            section {
-                padding: 4.5rem 5%;
-            }
-
-            .stats-strip {
-                max-width: 100%;
-            }
-
-            footer {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            #scrollTop {
-                bottom: 1.25rem;
-                right: 1.25rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav, section {
-                padding-left: 4%;
-                padding-right: 4%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DISAR Softhub — Excellence & Innovation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #f8f7ff;
+      --bg2:       #f1f0fa;
+      --bg3:       #e9e7f5;
+      --bg4:       #dddaf0;
+      --border:    rgba(120,80,220,0.13);
+      --border-h:  rgba(120,80,220,0.32);
+      --text:      #1a1035;
+      --text-2:    #4a4070;
+      --text-3:    #9b93c0;
+      --accent:    #7c3aed;
+      --accent-2:  #a855f7;
+      --accent-lt: rgba(124,58,237,0.08);
+      --nav-h:     64px;
+      --radius:    12px;
+      --font:      'Outfit', sans-serif;
+      --mono:      'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ── TYPOGRAPHY ── */
+    h1 {
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+    }
+    h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    h3 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--accent);
+    }
+    p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--text-2);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(248,247,255,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      text-decoration: none;
+    }
+    .logo-name {
+      font-family: var(--font);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+    }
+    .logo-tagline {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text-3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-2);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* nav social icons */
+    .nav-social { display: flex; align-items: center; gap: 0.6rem; }
+    .nav-social a {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--text-2);
+      transition: all 0.2s;
+    }
+    .nav-social a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .nav-contact-btn {
+      padding: 0.5rem 1.1rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .nav-contact-btn:hover { background: var(--accent-2); }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      width: 22px; height: 1.5px;
+      background: var(--accent);
+      border-radius: 1px;
+      transition: all .25s;
+      display: block;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      overflow-y: auto;
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 5% 2rem;
+      z-index: 101;
+      flex-direction: column;
+      gap: 0;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--text-2);
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 5%; }
+    hr.divider { border: none; height: 1px; background: var(--border); margin: 0; }
+
+    /* ── LABEL ── */
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .label::before {
+      content: '';
+      width: 16px; height: 1px;
+      background: var(--accent);
+      display: block; flex-shrink: 0;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header { margin-bottom: 2.5rem; }
+    .section-header .lead {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-top: 0.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: calc(var(--nav-h) + 3rem);
+      padding-bottom: 4rem;
+      background: linear-gradient(135deg, #f8f7ff 0%, #ede9fe 50%, #f8f7ff 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    h1 em { font-style: normal; color: var(--accent-2); }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-2);
+      max-width: 500px;
+      line-height: 1.75;
+      margin: 1.25rem 0 0;
+    }
+
+    /* stats strip */
+    .stats-strip {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 4rem;
+      position: relative; z-index: 2;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 640px;
+      background: #fff;
+      box-shadow: 0 2px 24px rgba(124,58,237,0.07);
+    }
+    .stat-item {
+      flex: 1; min-width: 130px;
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stat-lbl {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: #fff; }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .value-stack {
+      display: flex; flex-direction: column; gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .value-row {
+      padding: 1.25rem 1.4rem;
+      background: var(--bg2);
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: background 0.2s;
+    }
+    .value-row:hover { background: var(--bg3); }
+    .value-icon {
+      width: 32px; height: 32px;
+      border-radius: 7px;
+      background: #fff;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; flex-shrink: 0;
+    }
+    .value-row h3 { font-size: 0.8125rem; margin-bottom: 0.2rem; }
+    .value-row p { font-size: 0.78rem; line-height: 1.55; }
+
+    /* ── OVERVIEW ── */
+    #overview { background: var(--bg2); }
+    .overview-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      background: #fff;
+      position: relative; overflow: hidden;
+      box-shadow: 0 2px 16px rgba(124,58,237,0.06);
+    }
+    .overview-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent);
+    }
+    .overview-box p { font-size: 0.9rem; line-height: 1.8; max-width: 800px; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .service-card:hover {
+      box-shadow: 0 4px 24px rgba(124,58,237,0.12);
+      border-color: var(--border-h);
+    }
+    .service-img {
+      width: 100%; height: 150px;
+      object-fit: cover;
+      display: block;
+      background: var(--bg3);
+    }
+    .service-img-placeholder {
+      width: 100%; height: 150px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      flex-shrink: 0;
+    }
+    .service-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .service-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .service-body h3 { font-size: 0.9375rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .service-body p { font-size: 0.8125rem; line-height: 1.65; flex: 1; }
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1rem;
+    }
+    .tag {
+      font-size: 0.67rem; font-weight: 500;
+      padding: 0.2rem 0.6rem; border-radius: 4px;
+      background: var(--accent-lt);
+      color: var(--accent);
+      border: 1px solid rgba(124,58,237,0.18);
+    }
+
+    /* ── GLOBAL REACH ── */
+    #reach { background: #fff; }
+    .reach-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem; align-items: start;
+    }
+    .regions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .region-chip {
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      font-size: 0.8125rem; font-weight: 500;
+      color: var(--text-2); transition: all 0.2s;
+    }
+    .region-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lt); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .why-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: background 0.2s;
+    }
+    .why-card:hover { background: var(--bg3); }
+    .why-icon-wrap {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: #fff; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .why-card h3 { font-size: 0.8125rem; }
+    .why-card p { font-size: 0.77rem; line-height: 1.6; }
+
+    /* ── VALUES ── */
+    #values { background: var(--bg2); }
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .vm-card {
+      padding: 2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .vm-card:hover { border-color: var(--border-h); box-shadow: 0 2px 16px rgba(124,58,237,0.08); }
+    .vm-card.span2 { grid-column: 1 / -1; }
+    .vm-tag {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.75rem; display: block;
+    }
+    .vm-card p { font-size: 0.875rem; line-height: 1.75; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+    .contact-inner { max-width: 520px; }
+    .contact-card {
+      margin-top: 2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(124,58,237,0.06);
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text-2); font-size: 0.875rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:last-child { border-bottom: none; }
+    .contact-link:hover { background: var(--accent-lt); color: var(--accent); }
+    .contact-link-icon {
+      width: 34px; height: 34px; border-radius: 7px;
+      background: var(--bg2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+    }
+    .contact-link-arrow { margin-left: auto; color: var(--text-3); transition: transform 0.2s, color 0.2s; }
+    .contact-link:hover .contact-link-arrow { transform: translateX(3px); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 5%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      background: #fff;
+    }
+    .footer-left { display: flex; flex-direction: column; gap: 2px; }
+    .footer-logo-name { font-weight: 800; font-size: 1.1rem; color: var(--accent); letter-spacing: -0.03em; }
+    .footer-tagline { font-size: 0.62rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.07em; }
+    footer p { font-size: 0.75rem; color: var(--text-3); }
+
+    /* ── SCROLL BUTTONS ── */
+    .scroll-nav {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      display: flex; flex-direction: column; gap: 6px;
+      z-index: 90;
+      opacity: 0; transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .scroll-nav.visible { opacity: 1; transform: none; pointer-events: all; }
+    .scroll-nav button {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .scroll-nav button:hover { background: var(--accent-2); transform: translateY(-2px); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-contact-btn, .nav-social { display: none; }
+      .hamburger { display: flex; }
+      .about-inner, .reach-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .vm-grid { grid-template-columns: 1fr; }
+      .vm-card.span2 { grid-column: auto; }
+      section { padding: 4rem 5%; }
+      .stats-strip { max-width: 100%; }
+      footer { flex-direction: column; }
+      .scroll-nav { bottom: 1.25rem; right: 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      nav, section { padding-left: 4%; padding-right: 4%; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ─── NAV ─── -->
-    <nav>
-        <a href="#hero" class="logo">DISAR<span class="logo-dot"></span></a>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#reach">Global Reach</a></li>
-            <li><a href="#values">Values</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div style="display:flex;align-items:center;gap:1rem;">
-            <a href="#contact" class="nav-cta">Get in Touch →</a>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo-wrap">
+    <span class="logo-name">DISAR</span>
+    <span class="logo-tagline">Excellence &amp; Innovation</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#reach">Global Reach</a></li>
+    <li><a href="#values">Values</a></li>
+  </ul>
+  <div class="nav-social">
+    <a href="https://www.linkedin.com/in/disar-softhub-05b449414" target="_blank" title="LinkedIn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/disarsofthub/" target="_blank" title="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="#contact" class="nav-contact-btn">Contact Us</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#about" onclick="closeMenu()">About</a>
-        <a href="#services" onclick="closeMenu()">Services</a>
-        <a href="#reach" onclick="closeMenu()">Global Reach</a>
-        <a href="#values" onclick="closeMenu()">Values</a>
-        <a href="#contact" onclick="closeMenu()">Contact</a>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"    onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#reach"    onclick="closeMenu()">Global Reach</a>
+  <a href="#values"   onclick="closeMenu()">Values</a>
+  <a href="#contact"  onclick="closeMenu()">Contact Us</a>
+  <a href="https://www.linkedin.com/in/disar-softhub-05b449414" target="_blank">LinkedIn</a>
+  <a href="https://www.instagram.com/disarsofthub/" target="_blank">Instagram</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <h1>Best-in-Class<br><em>SAP Solutions</em><br>for Your Enterprise</h1>
+    <p class="hero-sub">DISAR Softhub Pvt Ltd. delivers expert functional and technical SAP solutions — helping organizations worldwide unlock the full potential of their data.</p>
+  </div>
+  <div class="stats-strip reveal">
+    <div class="stat-item"><div class="stat-val">6+</div><div class="stat-lbl">Service Areas</div></div>
+    <div class="stat-item"><div class="stat-val">MDM</div><div class="stat-lbl">Expert Implementation</div></div>
+    <div class="stat-item"><div class="stat-val">SAP</div><div class="stat-lbl">Functional & Technical</div></div>
+    <div class="stat-item"><div class="stat-val">BPM</div><div class="stat-lbl">Process Management</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <div class="label">Who We Are</div>
+      <h2>Built for the Data-Driven Enterprise</h2>
+      <p>DISAR Softhub Pvt Ltd. is a forward-thinking data solutions company helping organizations unlock the full potential of their data. In today's digital landscape, data is not just an asset — it's the foundation of strategic decision-making, operational efficiency, and customer satisfaction.</p>
+      <p>We specialize in designing, implementing, and optimizing enterprise-scale Data Management, Master Data Management (MDM), Master Data Governance services, and Enterprise Integration solutions tailored to meet the unique needs of modern enterprises.</p>
+      <p>DISAR is here to give the best solutions and services on Functional and Technical areas in SAP.</p>
+    </div>
+    <div class="value-stack reveal">
+      <div class="value-row">
+        <div class="value-icon">🎯</div>
+        <div><h3>Our Mission</h3><p>To empower organizations with clean, trusted, and governed data that fuels digital transformation, compliance, and intelligent decision-making.</p></div>
+      </div>
+      <div class="value-row">
+        <div class="value-icon">🔭</div>
+        <div><h3>Our Vision</h3><p>Creating an outstanding value for Customers through world-class data solutions and enduring partnerships.</p></div>
+      </div>
+      <div class="value-row">
+        <div class="value-icon">🤝</div>
+        <div><h3>Our Values</h3><p>We build trust by being honest and fair in all that we do, and we expect the same from others.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-header reveal">
+    <div class="label">What We Do</div>
+    <h2>Our Expertise</h2>
+  </div>
+  <div class="overview-box reveal">
+    <p>DISAR interacts with customers all across the globe, with a focus on clients from <strong style="color:var(--accent)">India, USA, UK, Mexico, and Germany</strong>. Our team brings deep expertise in engaging customers to make the best out of complex technical discussions. We are highly organized and focused to achieve the maximum degree of customer satisfaction — delivering precision, clarity, and results on every engagement.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <div class="label">What We Offer</div>
+    <h2>Our Services</h2>
+    <p class="lead">End-to-end SAP functional and technical services designed to transform how enterprises manage, govern, and leverage their data.</p>
+  </div>
+  <div class="services-grid reveal">
+
+    <div class="service-card">
+      <div class="service-img-placeholder" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">🗄️</div>
+      <div class="service-body">
+        <span class="service-num">01 — Master Data Management</span>
+        <h3>Master Data Management</h3>
+        <p>Curating and managing master data to ensure quality and fitness for purpose across all enterprise operations — Materials, Suppliers, Customers, Bill of Materials, and Equipment.</p>
+        <div class="service-tags">
+          <span class="tag">Materials</span><span class="tag">Vendors</span><span class="tag">Customers</span><span class="tag">BOM</span><span class="tag">Equipment</span>
+        </div>
+      </div>
     </div>
 
-    <!-- ─── HERO ─── -->
-    <section id="hero">
-        <div class="hero-grid"></div>
-        <div class="hero-glow"></div>
-        <div class="hero-content">
-            <div class="label">Data Solutions · SAP · MDM · BPM</div>
-            <h1>
-                Best-in-Class<br><em>SAP Solutions</em><br>for Your Enterprise
-            </h1>
-            <p class="hero-sub">
-                DISAR Softhub Pvt Ltd. delivers expert functional and technical SAP solutions — helping organizations worldwide unlock the full potential of their data.
-            </p>
-            <div class="hero-actions">
-                <a href="#services" class="btn btn-primary">Explore Services →</a>
-                <a href="#contact" class="btn btn-outline">Get in Touch</a>
-            </div>
+    <div class="service-card">
+      <div class="service-img-placeholder" style="background:linear-gradient(135deg,#f5f3ff,#ede9fe);">🛡️</div>
+      <div class="service-body">
+        <span class="service-num">02 — Data Governance</span>
+        <h3>Data Governance</h3>
+        <p>Improving data quality by assigning responsibility for accuracy, completeness, consistency, timeliness, validity, and uniqueness using Six Sigma methodologies.</p>
+        <div class="service-tags">
+          <span class="tag">Data Quality</span><span class="tag">Stewardship</span><span class="tag">Compliance</span><span class="tag">Six Sigma</span>
         </div>
-        <div class="stats-strip reveal">
-            <div class="stat-item">
-                <div class="stat-val">6+</div>
-                <div class="stat-lbl">Service Areas</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-val">MDM</div>
-                <div class="stat-lbl">Expert Implementation</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-val">SAP</div>
-                <div class="stat-lbl">Functional & Technical</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-val">BPM</div>
-                <div class="stat-lbl">Process Management</div>
-            </div>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-img-placeholder" style="background:linear-gradient(135deg,#faf5ff,#f3e8ff);">⚙️</div>
+      <div class="service-body">
+        <span class="service-num">03 — Business Process Automation</span>
+        <h3>Business Process Automation</h3>
+        <p>Technology-enabled automation of complex business processes to streamline operations, achieve digital transformation, improve service quality, and contain costs.</p>
+        <div class="service-tags">
+          <span class="tag">Automation</span><span class="tag">Integration</span><span class="tag">Digital Transformation</span>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <hr class="divider">
-
-    <!-- ─── ABOUT ─── -->
-    <section id="about">
-        <div class="about-inner">
-            <div class="about-text reveal">
-                <div class="label">Who We Are</div>
-                <h2>Built for the Data-Driven Enterprise</h2>
-                <p>
-                    DISAR Softhub Pvt Ltd. is a forward-thinking data solutions company helping organizations unlock the full potential of their data. In today's digital landscape, data is not just an asset — it's the foundation of strategic decision-making, operational efficiency, and customer satisfaction.
-                </p>
-                <p>
-                    We specialize in designing, implementing, and optimizing enterprise-scale Data Management, Master Data Management (MDM), Master Data Governance services, and Enterprise Integration solutions tailored to meet the unique needs of modern enterprises.
-                </p>
-                <p>
-                    DISAR is here to give the best solutions and services on Functional and Technical areas in SAP.
-                </p>
-            </div>
-            <div class="values-stack reveal">
-                <div class="value-row">
-                    <div class="value-icon">🎯</div>
-                    <div>
-                        <h3>Our Mission</h3>
-                        <p>To empower organizations with clean, trusted, and governed data that fuels digital transformation, compliance, and intelligent decision-making.</p>
-                    </div>
-                </div>
-                <div class="value-row">
-                    <div class="value-icon">🔭</div>
-                    <div>
-                        <h3>Our Vision</h3>
-                        <p>Creating an outstanding value for Customers through world-class data solutions and enduring partnerships.</p>
-                    </div>
-                </div>
-                <div class="value-row">
-                    <div class="value-icon">🤝</div>
-                    <div>
-                        <h3>Our Values</h3>
-                        <p>We build trust by being honest and fair in all that we do, and we expect the same from others.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="service-card">
+      <div class="service-img-placeholder" style="background:linear-gradient(135deg,#ede9fe,#e9d5ff);">📋</div>
+      <div class="service-body">
+        <span class="service-num">04 — Business Rules Creation</span>
+        <h3>Business Rules Creation</h3>
+        <p>Establishing business rules that assert structure and control organizational behavior — helping achieve goals, reduce mistakes, comply with legal requirements, and increase loyalty.</p>
+        <div class="service-tags">
+          <span class="tag">Rule Design</span><span class="tag">Documentation</span><span class="tag">Compliance</span>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <hr class="divider">
-
-    <!-- ─── OVERVIEW ─── -->
-    <section id="overview">
-        <div class="section-header reveal">
-            <div class="label">What We Do</div>
-            <h2>Our Expertise</h2>
+    <div class="service-card">
+      <div class="service-img-placeholder" style="background:linear-gradient(135deg,#f3e8ff,#ede9fe);">🔄</div>
+      <div class="service-body">
+        <span class="service-num">05 — Business Process Management</span>
+        <h3>Business Process Management</h3>
+        <p>A disciplined approach to identify, design, execute, measure, monitor, and control business processes — aligning them to strategy for effective overall performance.</p>
+        <div class="service-tags">
+          <span class="tag">Process Design</span><span class="tag">Optimization</span><span class="tag">Monitoring</span>
         </div>
-        <div class="overview-box reveal">
-            <p>
-                DISAR interacts with customers all across the globe, with a focus on clients from <strong style="color:var(--text)">India, USA, UK, Mexico, and Germany</strong>. Our team brings deep expertise in engaging customers to make the best out of complex technical discussions. We are highly organized and focused to achieve the maximum degree of customer satisfaction — delivering precision, clarity, and results on every engagement.
-            </p>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-img-placeholder" style="background:linear-gradient(135deg,#ddd6fe,#ede9fe);">🔗</div>
+      <div class="service-body">
+        <span class="service-num">06 — Data Integration</span>
+        <h3>Data Integration</h3>
+        <p>Combining data from heterogeneous systems into a single coherent data store — enabling synchronous data across your network and business intelligence extraction.</p>
+        <div class="service-tags">
+          <span class="tag">ETL Pipelines</span><span class="tag">Big Data</span><span class="tag">BI</span>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <hr class="divider">
-
-    <!-- ─── SERVICES ─── -->
-    <section id="services">
-        <div class="section-header reveal">
-            <div class="label">What We Offer</div>
-            <h2>Our Services</h2>
-            <p class="lead">End-to-end SAP functional and technical services designed to transform how enterprises manage, govern, and leverage their data.</p>
+    <div class="service-card">
+      <div class="service-img-placeholder" style="background:linear-gradient(135deg,#e9d5ff,#f3e8ff);">🚀</div>
+      <div class="service-body">
+        <span class="service-num">07 — Enterprise Transitions</span>
+        <h3>Transitioning to a Smarter Future</h3>
+        <p>Transitioning master data into modern ERP environments — ensuring greater accuracy, streamlined processes, and improved integration across procurement, inventory, and finance.</p>
+        <div class="service-tags">
+          <span class="tag">ERP Migration</span><span class="tag">SAP HANA</span><span class="tag">Finance</span><span class="tag">Procurement</span>
         </div>
-        <div class="services-grid reveal">
+      </div>
+    </div>
 
-            <div class="service-card">
-                <span class="service-num">01 — Master Data Management</span>
-                <h3>Master Data Management</h3>
-                <p>Curating and managing master data to ensure quality and fitness for purpose across all enterprise operations. We address Materials, Suppliers, Customers, Bill of Materials, and Equipment — ensuring a single version of truth across all applications.</p>
-                <div class="service-tags">
-                    <span class="tag">Materials</span>
-                    <span class="tag">Vendors</span>
-                    <span class="tag">Customers</span>
-                    <span class="tag">BOM</span>
-                    <span class="tag">Equipment</span>
-                </div>
-            </div>
+  </div>
+</section>
 
-            <div class="service-card">
-                <span class="service-num">02 — Data Governance</span>
-                <h3>Data Governance</h3>
-                <p>Improving quality of data by assigning a team responsible for accuracy, completeness, consistency, timeliness, validity, and uniqueness. We employ Six Sigma methodologies and tools for data mapping, profiling, cleansing, and monitoring.</p>
-                <div class="service-tags">
-                    <span class="tag">Data Quality</span>
-                    <span class="tag">Stewardship</span>
-                    <span class="tag">Compliance</span>
-                    <span class="tag">Six Sigma</span>
-                </div>
-            </div>
+<hr class="divider">
 
-            <div class="service-card">
-                <span class="service-num">03 — Business Process Automation</span>
-                <h3>Business Process Automation</h3>
-                <p>Technology-enabled automation of complex business processes to streamline operations, achieve digital transformation, improve service quality, and contain costs. We integrate applications and restructure labor resources to eliminate manual effort.</p>
-                <div class="service-tags">
-                    <span class="tag">Automation</span>
-                    <span class="tag">Integration</span>
-                    <span class="tag">Digital Transformation</span>
-                </div>
-            </div>
+<!-- GLOBAL REACH -->
+<section id="reach">
+  <div class="reach-inner">
+    <div class="reveal">
+      <div class="label">Global Reach</div>
+      <h2>Serving Clients Worldwide</h2>
+      <p>We interact with customers across the globe with deep expertise in making the best out of technical engagements. Highly organized and customer-focused, we drive maximum satisfaction on every project.</p>
+      <div class="regions">
+        <span class="region-chip">🇮🇳 India</span>
+        <span class="region-chip">🇺🇸 USA</span>
+        <span class="region-chip">🇬🇧 UK</span>
+        <span class="region-chip">🇲🇽 Mexico</span>
+        <span class="region-chip">🇩🇪 Germany</span>
+      </div>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card"><div class="why-icon-wrap">📈</div><h3>Agile & Scalable</h3><p>Solutions that grow with your business as your data landscape evolves.</p></div>
+      <div class="why-card"><div class="why-icon-wrap">🏭</div><h3>Deep Industry Knowledge</h3><p>Proven expertise across Pharma, Engineering, Manufacturing, and more.</p></div>
+      <div class="why-card"><div class="why-icon-wrap">⚡</div><h3>Accelerators & Frameworks</h3><p>Proprietary tools that reduce cost and increase time-to-value.</p></div>
+      <div class="why-card"><div class="why-icon-wrap">🔧</div><h3>Platform Expertise</h3><p>Hands-on experience with Ataccama, Syniti, and leading SAP platforms.</p></div>
+    </div>
+  </div>
+</section>
 
-            <div class="service-card">
-                <span class="service-num">04 — Business Rules Creation</span>
-                <h3>Business Rules Creation</h3>
-                <p>Establishing business rules that assert structure and control organizational behavior. We document rules clearly to help your organization achieve goals, reduce costly mistakes, improve communication, comply with legal requirements, and increase customer loyalty.</p>
-                <div class="service-tags">
-                    <span class="tag">Rule Design</span>
-                    <span class="tag">Documentation</span>
-                    <span class="tag">Compliance</span>
-                </div>
-            </div>
+<hr class="divider">
 
-            <div class="service-card">
-                <span class="service-num">05 — Business Process Management</span>
-                <h3>Business Process Management</h3>
-                <p>A disciplined approach to identify, design, execute, measure, monitor, and control both automated and non-automated business processes. BPM enables enterprises to align processes to business strategy, leading to effective overall company performance.</p>
-                <div class="service-tags">
-                    <span class="tag">Process Design</span>
-                    <span class="tag">Optimization</span>
-                    <span class="tag">Monitoring</span>
-                </div>
-            </div>
+<!-- VALUES -->
+<section id="values">
+  <div class="section-header reveal">
+    <div class="label">Our Foundation</div>
+    <h2>Mission, Vision &amp; Values</h2>
+  </div>
+  <div class="vm-grid reveal">
+    <div class="vm-card">
+      <span class="vm-tag">Mission</span>
+      <p>To empower organizations with clean, trusted, and governed data that fuels digital transformation, compliance, and intelligent decision-making.</p>
+    </div>
+    <div class="vm-card">
+      <span class="vm-tag">Vision</span>
+      <p>Creating an outstanding value for Customers through world-class data solutions and enduring partnerships built on transparency and results.</p>
+    </div>
+    <div class="vm-card span2">
+      <span class="vm-tag">Our Values</span>
+      <p>We will build trust by being honest and fair in all that we do, and we expect the same from others. Every solution we deliver reflects our belief that great data is the foundation of a great business. Our commitment to excellence drives every engagement, from discovery through delivery.</p>
+    </div>
+  </div>
+</section>
 
-            <div class="service-card">
-                <span class="service-num">06 — Data Integration</span>
-                <h3>Data Integration</h3>
-                <p>Combining data from heterogeneous database systems into a single coherent data store that provides synchronous data across your network. Our team leverages data integration for mining and extracting business intelligence from existing databases.</p>
-                <div class="service-tags">
-                    <span class="tag">ETL Pipelines</span>
-                    <span class="tag">Big Data</span>
-                    <span class="tag">BI</span>
-                </div>
-            </div>
+<hr class="divider">
 
-            <div class="service-card">
-                <span class="service-num">07 — Enterprise Transitions</span>
-                <h3>Transitioning to a Smarter Future</h3>
-                <p>We offer the transition of master data into modern ERP environments, ensuring greater accuracy, streamlined processes, and improved integration across operations. Covering procurement, inventory, and finance systems for consistency and reliability across all business units.</p>
-                <div class="service-tags">
-                    <span class="tag">ERP Migration</span>
-                    <span class="tag">SAP HANA</span>
-                    <span class="tag">Finance</span>
-                    <span class="tag">Procurement</span>
-                </div>
-            </div>
+<!-- CONTACT US -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="label">Contact Us</div>
+      <h2>Let's Work Together</h2>
+      <p>Ready to transform your data strategy? Reach out to us.</p>
+    </div>
+    <div class="contact-card reveal">
+      <a href="mailto:info@disar.co.in" class="contact-link">
+        <span class="contact-link-icon">📧</span>
+        <span>info@disar.co.in</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://www.disar.co.in" target="_blank" class="contact-link">
+        <span class="contact-link-icon">🌐</span>
+        <span>www.disar.co.in</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/disar-softhub-05b449414" target="_blank" class="contact-link">
+        <span class="contact-link-icon">💼</span>
+        <span>LinkedIn — Disar Softhub</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://www.instagram.com/disarsofthub/" target="_blank" class="contact-link">
+        <span class="contact-link-icon">📷</span>
+        <span>Instagram — @disarsofthub</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-        </div>
-    </section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <span class="footer-logo-name">DISAR</span>
+    <span class="footer-tagline">Excellence &amp; Innovation</span>
+  </div>
+  <p>© 2025 Disar Softhub Pvt Ltd. All rights reserved.</p>
+</footer>
 
-    <hr class="divider">
+<!-- SCROLL BUTTONS -->
+<div class="scroll-nav" id="scrollNav">
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Scroll to top">↑</button>
+  <button onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="Scroll to bottom">↓</button>
+</div>
 
-    <!-- ─── GLOBAL REACH ─── -->
-    <section id="reach">
-        <div class="reach-inner">
-            <div class="reveal">
-                <div class="label">Global Reach</div>
-                <h2>Serving Clients Worldwide</h2>
-                <p>We interact with customers across the globe with deep expertise in making the best out of technical engagements. Highly organized and customer-focused, we drive maximum satisfaction on every project.</p>
-                <div class="regions">
-                    <span class="region-chip">🇮🇳 India</span>
-                    <span class="region-chip">🇺🇸 USA</span>
-                    <span class="region-chip">🇬🇧 UK</span>
-                    <span class="region-chip">🇲🇽 Mexico</span>
-                    <span class="region-chip">🇩🇪 Germany</span>
-                </div>
-            </div>
-            <div class="why-grid reveal" style="border:none;background:transparent;gap:1rem;">
-                <div class="why-card" style="border:1px solid var(--border);border-radius:var(--radius);">
-                    <div class="why-icon-wrap">📈</div>
-                    <h3>Agile & Scalable</h3>
-                    <p>Solutions designed to grow with your business, adapting as your data landscape evolves.</p>
-                </div>
-                <div class="why-card" style="border:1px solid var(--border);border-radius:var(--radius);">
-                    <div class="why-icon-wrap">🏭</div>
-                    <h3>Deep Industry Knowledge</h3>
-                    <p>Proven expertise across Pharma, Engineering, Manufacturing, and more.</p>
-                </div>
-                <div class="why-card" style="border:1px solid var(--border);border-radius:var(--radius);">
-                    <div class="why-icon-wrap">⚡</div>
-                    <h3>Accelerators & Frameworks</h3>
-                    <p>Proprietary accelerators that reduce cost and increase time-to-value on every project.</p>
-                </div>
-                <div class="why-card" style="border:1px solid var(--border);border-radius:var(--radius);">
-                    <div class="why-icon-wrap">🔧</div>
-                    <h3>Platform Expertise</h3>
-                    <p>Hands-on experience with Ataccama, Syniti, and leading SAP platforms.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<script>
+  /* Hamburger */
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+  }
 
-    <hr class="divider">
+  /* Scroll Reveal */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    <!-- ─── VALUES ─── -->
-    <section id="values">
-        <div class="section-header reveal">
-            <div class="label">Our Foundation</div>
-            <h2>Mission, Vision & Values</h2>
-        </div>
-        <div class="vm-grid reveal">
-            <div class="vm-card">
-                <span class="vm-tag">Mission</span>
-                <p>To empower organizations with clean, trusted, and governed data that fuels digital transformation, compliance, and intelligent decision-making.</p>
-            </div>
-            <div class="vm-card">
-                <span class="vm-tag">Vision</span>
-                <p>Creating an outstanding value for Customers through world-class data solutions and enduring partnerships built on transparency and results.</p>
-            </div>
-            <div class="vm-card span2">
-                <span class="vm-tag">Our Values</span>
-                <p>We will build trust by being honest and fair in all that we do, and we expect the same from others. Every solution we deliver reflects our belief that great data is the foundation of a great business. Our commitment to excellence drives every engagement, from discovery through delivery.</p>
-            </div>
-        </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ─── CONTACT ─── -->
-    <section id="contact">
-        <div class="contact-inner">
-            <div class="reveal">
-                <div class="label" style="justify-content:center;">Get In Touch</div>
-                <h2>Let's Work Together</h2>
-                <p style="margin-top:0.75rem;max-width:420px;margin-left:auto;margin-right:auto;">
-                    Ready to transform your data strategy? Reach out to the DISAR team today.
-                </p>
-            </div>
-            <div class="contact-card reveal">
-                <a href="mailto:info@disar.co.in" class="contact-link">
-                    <span class="contact-link-icon">📧</span>
-                    <span>info@disar.co.in</span>
-                    <span class="contact-link-arrow">→</span>
-                </a>
-                <a href="https://www.disar.co.in" target="_blank" class="contact-link">
-                    <span class="contact-link-icon">🌐</span>
-                    <span>www.disar.co.in</span>
-                    <span class="contact-link-arrow">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── FOOTER ─── -->
-    <footer>
-        <a href="#hero" class="logo" style="font-size:1.1rem;">DISAR<span class="logo-dot"></span></a>
-        <p>© 2025 DISAR Softhub Pvt Ltd. All rights reserved.</p>
-        <span class="footer-tag">Excellence & Innovation</span>
-    </footer>
-
-    <!-- ─── SCROLL TO TOP ─── -->
-    <button id="scrollTop" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-    <!-- ─── JS ─── -->
-    <script>
-        /* ── Hamburger ── */
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        hamburger.addEventListener('click', () => {
-            const open = mobileMenu.classList.toggle('open');
-            hamburger.classList.toggle('open', open);
-        });
-        function closeMenu() {
-            mobileMenu.classList.remove('open');
-            hamburger.classList.remove('open');
-        }
-
-        /* ── Scroll Reveal ── */
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-            });
-        }, { threshold: 0.08 });
-        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-        /* ── Scroll To Top ── */
-        const scrollBtn = document.getElementById('scrollTop');
-        window.addEventListener('scroll', () => {
-            scrollBtn.classList.toggle('visible', window.scrollY > 400);
-        }, { passive: true });
-    </script>
+  /* Scroll Buttons visibility */
+  const scrollNav = document.getElementById('scrollNav');
+  window.addEventListener('scroll', () => {
+    scrollNav.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+</script>
 </body>
 </html>
