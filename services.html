@@ -12,24 +12,91 @@
 <body>
     <nav>
         <a href="index.html" class="logo-wrap"><span class="logo-name">DISAR</span><span class="logo-tagline">Excellence &amp; Innovation</span></a>
-        <ul class="nav-links">
+        <!--<ul class="nav-links">
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="integration.html">SAP Integration</a></li>
-            <li><a href="reach.html">Global Reach</a></li>
-            <!--<li><a href="values.html">Values</a></li>-->
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
+            <li><a href="reach.html">Global Reach</a></li>-->
+        <!--<li><a href="values.html">Values</a></li>-->
+        <!--<li><a href="contact.html">Contact Us</a></li>
+        </ul>-->
         <div class="nav-right">
-            <a class="nav-icon-btn" href="https://www.linkedin.com/in/disar-softhub-05b449414" target="_blank" title="LinkedIn">in</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="integration.html">SAP Integration</a></li>
+                <li><a href="reach.html">Global Reach</a></li>
+                <!--<li><a href="values.html">Values</a></li>-->
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul><a class="nav-icon-btn" href="https://www.linkedin.com/in/disar-softhub-05b449414" target="_blank" title="LinkedIn">in</a>
             <a class="nav-icon-btn" href="https://www.instagram.com/disarsofthub/" target="_blank" title="Instagram">◎</a>
             <a href="contact.html" class="nav-contact-btn">Contact Us</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
-        <a href="about.html" onclick="closeMenu()">About</a><a href="services.html" onclick="closeMenu()">Services</a><a href="integration.html" onclick="closeMenu()">SAP Integration</a><a href="reach.html" onclick="closeMenu()">Global Reach</a><a href="values.html" onclick="closeMenu()">Values</a><a href="contact.html" onclick="closeMenu()">Contact Us</a>
-    </div><main class="page"><section><div class="section-header reveal"><span class="label">Our Services</span><h1>SAP services built for clean, governed, connected data.</h1><p class="lead">Each service card is now easier to maintain in a separate page instead of one large HTML file.</p></div><div class="cards-grid reveal"><div class="card"><div class="card-img" style="background-image:url(assets/images/hero-data.svg)"></div><div class="card-body"><h3>Master Data Management</h3><p>Curating and managing master data across Materials, Suppliers, Customers, BOM, and Equipment.</p><div class="tag-row"><span class="tag">Materials</span><span class="tag">Vendors</span><span class="tag">Customers</span><span class="tag">BOM</span></div></div></div><div class="card"><div class="card-img" style="background-image:url(assets/images/hero-governance.svg)"></div><div class="card-body"><h3>Master Data Governance</h3><p>Data ownership, quality, stewardship, validation, consistency, timeliness, and compliance.</p><div class="tag-row"><span class="tag">Quality</span><span class="tag">Compliance</span><span class="tag">Stewardship</span></div></div></div><div class="card"><div class="card-img" style="background-image:url(assets/images/hero-sap.svg)"></div><div class="card-body"><h3>Business Process Automation</h3><p>Technology-enabled automation to streamline operations, reduce cost, and improve service quality.</p><div class="tag-row"><span class="tag">Automation</span><span class="tag">Integration</span></div></div></div><div class="card"><div class="card-img" style="background-image:url(assets/images/hero-data.svg)"></div><div class="card-body"><h3>Business Rules Creation</h3><p>Rules that define structure, reduce mistakes, improve compliance, and support consistent outcomes.</p></div></div><div class="card"><div class="card-img" style="background-image:url(assets/images/hero-governance.svg)"></div><div class="card-body"><h3>Business Process Management</h3><p>Identify, design, execute, monitor, and control business processes aligned to enterprise strategy.</p></div></div><div class="card"><div class="card-img" style="background-image:url(assets/images/hero-sap.svg)"></div><div class="card-body"><h3>Data Integration</h3><p>Combine data from heterogeneous systems into coherent data stores for reporting and intelligence.</p></div></div></div></section></main>
+        <a href="about.html" onclick="closeMenu()">About</a><a href="services.html" onclick="closeMenu()">Services</a><a href="integration.html" onclick="closeMenu()">SAP Integration</a>
+        <a href="reach.html" onclick="closeMenu()">Global Reach</a><a href="values.html" onclick="closeMenu()">Values</a><a href="contact.html" onclick="closeMenu()">Contact Us</a>
+    </div><main class="page">
+        <section>
+            <div class="section-header reveal">
+                <span class="label">Our Services</span><h1>SAP services built for clean, governed, connected data</h1>
+                <!--<p class="lead">Each service card is now easier to maintain in a separate page instead of one large HTML file.</p>-->
+            </div>
+            <div class="cards-grid reveal">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="assets/images/hero-data.svg" alt="SAP Integration">
+                    </div>
+                    <div class="card-body">
+                        <h3>Master Data Management</h3><p>Curating and managing master data across Materials, Suppliers, Customers, BOM, and Equipment.</p>
+                        <div class="tag-row"><span class="tag">Materials</span><span class="tag">Vendors</span><span class="tag">Customers</span><span class="tag">BOM</span></div>
+                    </div>
+                </div><div class="card">
+                    <div class="card-img">
+                        <img src="assets/images/hero-governance.svg" alt="SAP Integration">
+                    </div><div class="card-body">
+                        <h3>Master Data Governance</h3>
+                        <p>Data ownership, quality, stewardship, validation, consistency, timeliness, and compliance.</p><div class="tag-row">
+                            <span class="tag">Quality</span><span class="tag">Compliance</span>
+                            <span class="tag">Stewardship</span>
+                        </div>
+                    </div>
+                </div><div class="card">
+                    <div class="card-img">
+                        <img src="assets/images/hero-sap.svg" alt="SAP Integration">
+                    </div><div class="card-body">
+                        <h3>Business Process Automation</h3>
+                        <p>Technology-enabled automation to streamline operations, reduce cost, and improve service quality.</p><div class="tag-row">
+                            <span class="tag">Automation</span>
+                            <span class="tag">Integration</span>
+                        </div>
+                    </div>
+                </div><div class="card">
+                    <div class="card-img">
+                        <img src="assets/images/hero-data.svg" alt="SAP Integration">
+                    </div><div class="card-body">
+                        <h3>Business Rules Creation</h3><p>Rules that define structure, reduce mistakes, improve compliance, and support consistent outcomes.</p>
+                    </div>
+                </div><div class="card">
+                    <div class="card-img">
+                        <img src="assets/images/hero-governance.svg" alt="SAP Integration">
+                    </div><div class="card-body">
+                        <h3>Business Process Management</h3>
+                        <p>Identify, design, execute, monitor, and control business processes aligned to enterprise strategy.</p>
+                    </div>
+                </div><div class="card">
+                    <div class="card-img">
+                        <img src="assets/images/hero-sap.svg" alt="SAP Integration">
+                    </div><div class="card-body">
+                        <h3>Data Integration</h3>
+                        <p>Combine data from heterogeneous systems into coherent data stores for reporting and intelligence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     <!--<footer><p>© 2025 Disar Softhub Pvt Ltd. All rights reserved.</p></footer>-->
     <script src="assets/js/script.js"></script>
 </body>
