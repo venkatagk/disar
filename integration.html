@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>SAP Integration — DISAR Softhub</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo-wrap"><span class="logo-name">DISAR</span><span class="logo-tagline">Excellence &amp; Innovation</span></a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="integration.html">SAP Integration</a></li>
+            <li><a href="reach.html">Global Reach</a></li>
+            <!--<li><a href="values.html">Values</a></li>-->
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="nav-right">
+            <a class="nav-icon-btn" href="https://www.linkedin.com/in/disar-softhub-05b449414" target="_blank" title="LinkedIn">in</a>
+            <a class="nav-icon-btn" href="https://www.instagram.com/disarsofthub/" target="_blank" title="Instagram">◎</a>
+            <a href="contact.html" class="nav-contact-btn">Contact Us</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="about.html" onclick="closeMenu()">About</a><a href="services.html" onclick="closeMenu()">Services</a><a href="integration.html" onclick="closeMenu()">SAP Integration</a><a href="reach.html" onclick="closeMenu()">Global Reach</a><a href="values.html" onclick="closeMenu()">Values</a><a href="contact.html" onclick="closeMenu()">Contact Us</a>
+    </div><main class="page">
+        <section class="connection-section">
+            <div class="connection-layout">
+                <div class="reveal">
+                    <span class="label">SAP Integration</span><h1>Visual connection between SAP S/4HANA and enterprise modules.</h1>
+                    <p class="lead">
+                        Our SAP integration model connects S/4HANA with master data, governance, automation,
+                        analytics, and external enterprise systems. The animation shows how DISAR helps data
+                        move cleanly between business modules, improves process visibility, and creates a
+                        trusted foundation for digital transformation.
+                    </p><div class="connection-list"><div class="mini-card"><b>Digital Core:</b> SAP S/4HANA at the center.</div><div class="mini-card"><b>Connected Modules:</b> MDM, MDG, Finance, Procurement, Inventory, Analytics.</div>
+               </div>
+                </div><div class="network-map reveal"><div class="orbit"></div><svg viewBox="0 0 800 560" preserveAspectRatio="none"><path class="pulse-line" d="M400 280 C180 120 150 105 100 85" /><path class="pulse-line" d="M400 280 C620 120 650 105 700 85" /><path class="pulse-line" d="M400 280 C185 430 155 455 100 475" /><path class="pulse-line" d="M400 280 C620 430 650 455 700 475" /><path class="pulse-line" d="M400 280 C400 135 400 95 400 65" /><path class="pulse-line" d="M400 280 C400 425 400 465 400 505" /></svg><div class="module core">SAP S/4HANA<span>Digital Core</span></div><div class="module m1">MDM<span>Master Data</span></div><div class="module m2">MDG<span>Governance</span></div><div class="module m3">Finance<span>Controls</span></div><div class="module m4">Analytics<span>Insights</span></div><div class="module m5">Procurement<span>Suppliers</span></div><div class="module m6">Inventory<span>Operations</span></div></div>
+            </div>
+        </section>
+    </main>
+    <!--<footer><p>© 2025 Disar Softhub Pvt Ltd. All rights reserved.</p></footer>-->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

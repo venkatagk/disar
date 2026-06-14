@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fcfaff"/><stop offset="1" stop-color="#e8ddff"/></linearGradient><linearGradient id="core" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#a855f7"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="15" stdDeviation="16" flood-color="#7c3aed" flood-opacity=".16"/></filter></defs>
+  <rect width="900" height="620" fill="url(#bg)"/>
+  <circle cx="450" cy="310" r="210" fill="#7c3aed" opacity=".06"/>
+  <path d="M205 190 H695 M205 310 H695 M205 430 H695" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="10 10" opacity=".32"/>
+  <path d="M310 150 V470 M450 110 V510 M590 150 V470" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="10 10" opacity=".25"/>
+  <g filter="url(#shadow)"><rect x="325" y="210" width="250" height="200" rx="34" fill="url(#core)"/><text x="450" y="280" text-anchor="middle" font-family="Outfit,Arial" font-size="27" font-weight="800" fill="white">Industry</text><text x="450" y="315" text-anchor="middle" font-family="Outfit,Arial" font-size="27" font-weight="800" fill="white">Standards</text><text x="450" y="354" text-anchor="middle" font-family="Outfit,Arial" font-size="15" font-weight="700" fill="white" opacity=".82">Quality • Controls • Compliance</text></g>
+  <g filter="url(#shadow)" font-family="Outfit,Arial" text-anchor="middle">
+    <g><rect x="90" y="130" width="190" height="105" rx="24" fill="white" stroke="#d9ccff"/><text x="185" y="174" font-size="20" font-weight="800" fill="#7c3aed">Governance</text><text x="185" y="202" font-size="13" font-weight="700" fill="#74678f">Ownership + Workflow</text></g>
+    <g><rect x="620" y="130" width="190" height="105" rx="24" fill="white" stroke="#d9ccff"/><text x="715" y="174" font-size="20" font-weight="800" fill="#7c3aed">Validation</text><text x="715" y="202" font-size="13" font-weight="700" fill="#74678f">Accuracy + Rules</text></g>
+    <g><rect x="90" y="385" width="190" height="105" rx="24" fill="white" stroke="#d9ccff"/><text x="185" y="429" font-size="20" font-weight="800" fill="#7c3aed">Security</text><text x="185" y="457" font-size="13" font-weight="700" fill="#74678f">Roles + Access</text></g>
+    <g><rect x="620" y="385" width="190" height="105" rx="24" fill="white" stroke="#d9ccff"/><text x="715" y="429" font-size="20" font-weight="800" fill="#7c3aed">Monitoring</text><text x="715" y="457" font-size="13" font-weight="700" fill="#74678f">KPIs + Quality</text></g>
+  </g>
+  <g fill="none" stroke="#a855f7" stroke-width="8" stroke-linecap="round" opacity=".7"><path d="M450 92 l32 32 62 -72"><animate attributeName="opacity" values=".35;.9;.35" dur="2.4s" repeatCount="indefinite"/></path><path d="M450 528 l32 32 62 -72"><animate attributeName="opacity" values=".9;.35;.9" dur="2.4s" repeatCount="indefinite"/></path></g>
+  <circle cx="310" cy="310" r="9" fill="#a855f7"><animate attributeName="opacity" values="1;.25;1" dur="2s" repeatCount="indefinite"/></circle><circle cx="590" cy="310" r="9" fill="#a855f7"><animate attributeName="opacity" values=".25;1;.25" dur="2s" repeatCount="indefinite"/></circle>
+</svg>
