@@ -29,6 +29,10 @@
 		<loc>https://disar.co.in/ai.html</loc>
 		<priority>0.10</priority>
 	</url>
+	<url>
+		<loc>https://disar.co.in/careers.html</loc>
+		<priority>0.7</priority>
+	</url>
 	 
 
 </urlset>
